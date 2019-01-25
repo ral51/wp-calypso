@@ -43,6 +43,15 @@ const shouldEmitStatsWithReasons = process.env.EMIT_STATS === 'withreasons';
 const shouldCheckForCycles = process.env.CHECK_CYCLES === 'true';
 const codeSplit = config.isEnabled( 'code-splitting' );
 const isCalypsoClient = process.env.CALYPSO_CLIENT === 'true';
+const isDesktop = calypsoEnv === 'desktop';
+
+const defaultBrowserslistEnv = isCalypsoClient || isDesktop ? 'evergreen' : 'defaults';
+const browserslistEnv = process.env.BROWSERSLIST_ENV || defaultBrowserslistEnv;
+const extraPath = browserslistEnv === 'defaults' ? 'fallback' : browserslistEnv;
+
+if ( ! process.env.BROWSERSLIST_ENV ) {
+	process.env.BROWSERSLIST_ENV = browserslistEnv;
+}
 
 /*
  * Create reporter for ProgressPlugin (used with EMIT_STATS)
@@ -118,8 +127,8 @@ function getWebpackConfig( {
 		mode: isDevelopment ? 'development' : 'production',
 		devtool: process.env.SOURCEMAP || ( isDevelopment ? '#eval' : false ),
 		output: {
-			path: path.join( __dirname, 'public' ),
-			publicPath: '/calypso/',
+			path: path.join( __dirname, 'public', extraPath ),
+			publicPath: `/calypso/${ extraPath }/`,
 			filename: '[name].[chunkhash].min.js', // prefer the chunkhash, which depends on the chunk, not the entire build
 			chunkFilename: '[name].[chunkhash].min.js', // ditto
 			devtoolModuleFilenameTemplate: 'app:///[resource-path]',
@@ -142,10 +151,8 @@ function getWebpackConfig( {
 				parallel: workerCount,
 				sourceMap: Boolean( process.env.SOURCEMAP ),
 				terserOptions: {
-					ecma: 5,
-					safari10: true,
 					mangle: calypsoEnv !== 'desktop',
-				},
+				}
 			} ),
 		},
 		module: {
@@ -156,7 +163,7 @@ function getWebpackConfig( {
 				TranspileConfig.loader( {
 					workerCount,
 					configFile: path.join( __dirname, 'babel.config.js' ),
-					cacheDirectory: path.join( __dirname, 'build', '.babel-client-cache' ),
+					cacheDirectory: path.join( __dirname, 'build', '.babel-client-cache', extraPath ),
 					cacheIdentifier,
 					exclude: /node_modules\//,
 				} ),
@@ -223,10 +230,15 @@ function getWebpackConfig( {
 			new webpack.NormalModuleReplacementPlugin( /^path$/, 'path-browserify' ),
 			isCalypsoClient && new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ ),
 			...SassConfig.plugins( { cssFilename, minify: ! isDevelopment } ),
-			new AssetsWriter( {
-				filename: 'assets.json',
-				path: path.join( __dirname, 'server', 'bundler' ),
-			} ),
+			isCalypsoClient &&
+				new AssetsWriter( {
+					filename:
+						browserslistEnv === 'defaults'
+							? 'assets-fallback.json'
+							: `assets-${ browserslistEnv }.json`,
+					path: path.join( __dirname, 'server', 'bundler' ),
+					assetExtraPath: extraPath,
+				} ),
 			new DuplicatePackageCheckerPlugin(),
 			shouldCheckForCycles &&
 				new CircularDependencyPlugin( {

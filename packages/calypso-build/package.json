@@ -26,6 +26,8 @@
 		"@automattic/calypso-color-schemes": "file:../calypso-color-schemes",
 		"autoprefixer": "9.4.4",
 		"babel-loader": "8.0.5",
+		"browserslist": "4.5.2",
+		"caniuse-api": "3.0.0",
 		"css-loader": "2.1.1",
 		"mini-css-extract-plugin-with-rtl": "github:Automattic/mini-css-extract-plugin-with-rtl",
 		"postcss-custom-properties": "8.0.9",
