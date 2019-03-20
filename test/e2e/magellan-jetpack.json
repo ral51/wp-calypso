@@ -1,10 +1,9 @@
 {
   "mocha_tests": [
-	  "specs",
-	  "specs-jetpack-calypso",
-	  "specs-blocks"
+	  "test/e2e/specs",
+	  "test/e2e/specs-jetpack-calypso",
+	  "test/e2e/specs-blocks"
   ],
-  "mocha_opts": "test/mocha.opts",
   "mocha_args": "-R spec-xunit-reporter",
   "max_test_attempts": 3,
   "max_workers": 3,
@@ -12,7 +11,7 @@
   "sauce": false,
   "framework": "testarmada-magellan-mocha-plugin",
   "reporters": [
-	  "./lib/reporter/magellan-reporter.js"
+	  "./test/e2e/lib/reporter/magellan-reporter.js"
   ],
   "executors": [
 	"testarmada-magellan-local-executor"
