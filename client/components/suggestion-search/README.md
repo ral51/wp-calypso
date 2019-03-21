@@ -36,7 +36,10 @@ It's common that this component is used in a form. This `id` prop is passed to t
 The placeholder text to show if there has nothing been entered yet.
 
 ### `{Func} onChange`
-The callback function for receiving updated value, whether it's by typing, autocompletion, or suggestion picking.
+The callback function for receiving updated value as the user updates the search field.
+
+### `{Func} onSelect`
+The callback function for receiving updated value when the user selects a suggestion.
 
 ### `{Func} sortResults` 
 An optional method for sorting the results that we display in the suggestion list.

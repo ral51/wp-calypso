@@ -13,9 +13,8 @@ import { connect } from 'react-redux';
  */
 import Button from 'components/button';
 import FormFieldset from 'components/forms/form-fieldset';
-import SiteVerticalsSuggestionSearch, {
-	isVerticalSearchPending,
-} from 'components/site-verticals-suggestion-search';
+import SiteVerticalsSuggestionSearch from 'components/site-verticals-suggestion-search';
+import { isVerticalSearchPending } from 'components/site-verticals-suggestion-search/utils';
 import { setSiteVertical } from 'state/signup/steps/site-vertical/actions';
 import {
 	getSiteVerticalName,
