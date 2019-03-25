@@ -27,7 +27,6 @@ class SuggestionSearch extends Component {
 		placeholder: PropTypes.string,
 		onChange: PropTypes.func,
 		onSelect: PropTypes.func,
-		sortResults: PropTypes.func,
 		suggestions: PropTypes.array,
 		value: PropTypes.string,
 		autoFocus: PropTypes.bool,
@@ -39,7 +38,6 @@ class SuggestionSearch extends Component {
 		placeholder: '',
 		onChange: noop,
 		onSelect: noop,
-		sortResults: null,
 		suggestions: [],
 		value: '',
 		autoFocus: false,
@@ -121,10 +119,7 @@ class SuggestionSearch extends Component {
 			return [];
 		}
 
-		return ( 'function' === typeof this.props.sortResults
-			? this.props.sortResults( this.props.suggestions, this.state.query )
-			: this.props.suggestions
-		).map( hint => ( { label: hint } ) );
+		return this.props.suggestions.map( hint => ( { label: hint } ) );
 	}
 
 	getSuggestionLabel( suggestionPosition ) {
