@@ -90,7 +90,9 @@ export class SiteVerticalsSuggestionSearch extends Component {
 	 */
 	setSearchResults = results => {
 		if ( size( results ) ) {
-			// if the only result is a user input, then concat that with the previous results and remove the last user input
+			// if the only result is a user input (non-vertical),
+			// and we have some previous results
+			// then concat that with the previous results and remove the last user input
 			if (
 				! find( results, item => ! item.isUserInputVertical ) &&
 				1 < size( this.state.results )
@@ -99,6 +101,8 @@ export class SiteVerticalsSuggestionSearch extends Component {
 			}
 
 			this.setState( { results }, () => {
+				// if a user has selected a vertical from the suggestion list,
+				// set a flag to load sans debounce
 				if ( false === this.state.isSuggestionSelected ) {
 					this.updateVerticalData(
 						this.searchForVerticalMatches( this.state.searchValue ),

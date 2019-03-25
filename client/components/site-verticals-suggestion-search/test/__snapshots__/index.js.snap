@@ -6,6 +6,7 @@ exports[`<SiteVerticalsSuggestionSearch /> should render 1`] = `
     autoFocus={false}
     id="siteTopic"
     onChange={[Function]}
+    onSelect={[Function]}
     placeholder="Enter a keyword or select one from below."
     railcar={
       Object {
@@ -14,12 +15,7 @@ exports[`<SiteVerticalsSuggestionSearch /> should render 1`] = `
         "id": "fakeuuid-site-vertical-suggestion",
       }
     }
-    sortResults={[Function]}
-    suggestions={
-      Array [
-        "doo",
-      ]
-    }
+    suggestions={Array []}
     value=""
   />
 </Fragment>
