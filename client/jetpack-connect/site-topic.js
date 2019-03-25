@@ -32,7 +32,7 @@ class JetpackSiteTopic extends Component {
 		if ( ! jpVersion ) {
 			return null;
 		}
-		if ( versionCompare( jpVersion, 7.2 ) < 0 || jpVersion === '7.2-alpha' ) {
+		if ( versionCompare( jpVersion, '7.2-alpha', '>=' ) ) {
 			page( `/jetpack/connect/user-type/${ siteSlug }` );
 		} else {
 			page( `/jetpack/connect/plans/${ siteSlug }` );
