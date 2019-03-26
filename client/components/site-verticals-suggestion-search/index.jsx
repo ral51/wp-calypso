@@ -193,7 +193,6 @@ export class SiteVerticalsSuggestionSearch extends Component {
 	render() {
 		const { translate, placeholder, autoFocus } = this.props;
 		const suggestions = this.getSuggestions();
-		const showPopularTopics = ! this.state.searchValue && this.props.showPopular;
 
 		return (
 			<>
@@ -207,7 +206,9 @@ export class SiteVerticalsSuggestionSearch extends Component {
 					autoFocus={ autoFocus } // eslint-disable-line jsx-a11y/no-autofocus
 					railcar={ this.state.railcar }
 				/>
-				{ showPopularTopics && <PopularTopics onSelect={ this.onSiteTopicSelect } /> }
+				{ this.props.shouldShowPopularTopics( this.state.searchValue ) && (
+					<PopularTopics onSelect={ this.onSiteTopicSelect } />
+				) }
 			</>
 		);
 	}
