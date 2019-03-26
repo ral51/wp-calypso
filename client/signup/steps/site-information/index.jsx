@@ -210,7 +210,7 @@ export default connect(
 		const shouldFetchVerticalData =
 			ownProps.showSiteMockups &&
 			getSiteType( state ) === 'business' &&
-			'' === getSiteVerticalPreview( state );
+			getSiteVerticalPreview( state ) === '';
 
 		return {
 			formFields,
