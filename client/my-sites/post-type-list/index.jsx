@@ -29,7 +29,7 @@ import ListEnd from 'components/list-end';
 import PostItem from 'blocks/post-item';
 import PostTypeListEmptyContent from './empty-content';
 import PostTypeListMaxPagesNotice from './max-pages-notice';
-import UpgradeNudge from 'my-sites/upgrade-nudge';
+import UpgradeNudge from 'blocks/upgrade-nudge';
 import { FEATURE_NO_ADS } from 'lib/plans/constants';
 
 /**
