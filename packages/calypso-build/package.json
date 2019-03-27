@@ -24,7 +24,7 @@
 	"bin": "./bin/build-package.js",
 	"dependencies": {
 		"@automattic/calypso-color-schemes": "file:../calypso-color-schemes",
-		"autoprefixer": "9.4.4",
+		"autoprefixer": "9.5.0",
 		"babel-loader": "8.0.5",
 		"css-loader": "2.1.1",
 		"mini-css-extract-plugin-with-rtl": "github:Automattic/mini-css-extract-plugin-with-rtl",
@@ -34,6 +34,6 @@
 		"terser-webpack-plugin": "1.2.3",
 		"thread-loader": "2.1.2",
 		"webpack-filter-warnings-plugin": "1.2.1",
-		"webpack-rtl-plugin": "1.8.0"
+		"webpack-rtl-plugin": "1.8.2"
 	}
 }
